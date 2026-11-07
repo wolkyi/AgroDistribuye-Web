@@ -244,13 +244,13 @@ código Java; valores simulados salvo matriz OSRM.
 | α, β, γ          | COP/min     | B: α=50,100,300 y β=200; C: γ=50,100,200           |
 | A_d, N_d         | conjuntos   | 72 arcos dirigidos y 9 nodos locales por depósito  |
 
-### Formulación esencial: siete ecuaciones clave
+### Formulación matemática completa: diecinueve ecuaciones
 
-El modelo se expresa de forma resumida en siete ecuaciones que describen la función objetivo y las principales condiciones de atención, continuidad, capacidad, inventario y ventanas horarias. Las 19 expresiones del modelo completo se conservan en el anexo desplegable de esta página y en el documento descargable.
+La formulación completa se presenta en el cuerpo de Métodos, organizada en grupos funcionales. Los conjuntos, símbolos y unidades están definidos en las tablas anteriores.
 
 #### A. Función objetivo
 
-El escenario A minimiza el costo fijo de los vehículos y el costo por distancia recorrida.
+La expresión (1) minimiza costos fijos y recorridos; las variantes (2) y (3) incorporan penalizaciones temporales simuladas, sin representar gastos empresariales observados.
 
 **(1)**
 
@@ -259,145 +259,157 @@ $$
 $$
 
 
-Los escenarios B y C agregan penalizaciones simuladas por espera o tiempo de operación; sus expresiones están en el anexo, pues no representan gastos empresariales observados.
-
-#### B. Cobertura, flujos y recursos
-
-Cada productor con demanda positiva se atiende una vez y las entradas y salidas del vehículo conservan el flujo.
-
 **(2)**
+
+$$
+Z_{B} = Z_{A} + \alpha\sum_{d \in D}^{}{\sum_{v \in V}^{}w_{dv}^{D}} + \beta\sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{i \in P}^{}w_{dvi}^{P}}}
+$$
+
+
+**(3)**
+
+$$
+Z_{C} = Z_{A} + \gamma\sum_{d \in D}^{}{\sum_{v \in V}^{}o_{dv}}
+$$
+
+
+#### B. Atención y asignación de vehículos
+
+Cada productor con demanda positiva se atiende una sola vez (4); la asignación de vehículos a depósitos y visitas se vincula en (5).
+
+**(4)**
 
 $$
 \sum_{d \in D}^{}{\sum_{v \in V}^{}y_{dvi}} = \delta_{i},\quad\forall i \in P
 $$
 
-**(3)**
+
+**(5)**
+
+$$
+\sum_{d \in D}^{}z_{dv} \leq 1,\quad y_{dvi} \leq z_{dv}
+$$
+
+
+#### C. Salida, retorno y continuidad del flujo
+
+Las condiciones (6) y (7) representan salida y regreso al mismo depósito y la conservación del flujo entre nodos.
+
+**(6)**
+
+$$
+\sum_{j \in P}^{}x_{dv0j} = \sum_{i \in P}^{}x_{dvi0} = z_{dv}
+$$
+
+
+**(7)**
 
 $$
 \sum_{j \neq i}^{}x_{dvji} = \sum_{j \neq i}^{}x_{dvij} = y_{dvi}
 $$
 
 
-La carga por vehículo y los productos disponibles en cada depósito imponen los siguientes límites:
+#### D. Capacidad e inventario multiproducto
 
-**(4)**
+Las restricciones (8) y (9) limitan la carga de vehículos y el consumo de existencias por depósito y producto.
+
+**(8)**
 
 $$
 \sum_{i \in P}^{}{\bar{q}}_{i}y_{dvi} \leq Q_{v}z_{dv}
 $$
 
-**(5)**
+
+**(9)**
 
 $$
 \sum_{v \in V}^{}{\sum_{i \in P}^{}q_{ik}}y_{dvi} \leq S_{dk}
 $$
 
 
-#### C. Viabilidad temporal
+#### E. Ventanas horarias y cierre de jornada
 
-La atención de cada productor depende del servicio previo y de la duración del desplazamiento, y debe finalizar dentro de su ventana horaria.
+El tiempo hasta el primer servicio se limita mediante (10), la continuidad temporal por (11), el regreso por (12) y las ventanas de servicio por (13).
 
-**(6)**
+**(10)**
+
+$$
+t_{dvi} \geq s_{dv} + \tau_{0i}^{d} - M\left( 1 - x_{dv0i} \right)
+$$
+
+
+**(11)**
 
 $$
 t_{dvj} \geq t_{dvi} + h_{i} + \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)
 $$
 
-**(7)**
+
+**(12)**
+
+$$
+t_{dvi} + h_{i} + \tau_{i0}^{d} \leq T_{f} + M\left( 1 - x_{dvi0} \right)
+$$
+
+
+**(13)**
 
 $$
 a_{i} \leq t_{dvi} \leq b_{i} - h_{i},\quad T_{0} \leq s_{dv} \leq T_{f}
 $$
 
 
-Las restantes restricciones sobre activación, salida y retorno a depósito, espera, cierre de jornada y dominio se mantienen en el modelo y se documentan a continuación.
+#### F. Esperas y duración de la operación
 
-<details>
-<summary><strong>Anexo técnico: formulación matemática completa (19 ecuaciones)</strong></summary>
+Las expresiones (14) a (18) cuantifican esperas antes de salir, ante productores y duración de la operación según las rutas modeladas.
 
-Estas 19 expresiones reproducen la formulación extendida del artículo y del modelo implementado. Las referencias A1–A19 son la numeración auxiliar del anexo.
+**(14)**
 
-#### Objetivos
-**(A1)**
+$$
+w_{dv}^{D} = s_{dv} - T_{0}
+$$
 
-$$\min Z_{A} = \sum_{d \in D}^{}{\sum_{v \in V}^{}F_{v}}z_{dv} + \sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{(i,j) \in A_{d}}^{}c_{v}}}L_{ij}^{d}x_{dvij}$$
 
-**(A2)**
+**(15)**
 
-$$Z_{B} = Z_{A} + \alpha\sum_{d \in D}^{}{\sum_{v \in V}^{}w_{dv}^{D}} + \beta\sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{i \in P}^{}w_{dvi}^{P}}}$$
+$$
+s_{dv} \leq T_{0} + \left( T_{f} - T_{0} \right)z_{dv},\quad w_{dv}^{D} \leq \left( T_{f} - T_{0} \right)z_{dv}
+$$
 
-**(A3)**
 
-$$Z_{C} = Z_{A} + \gamma\sum_{d \in D}^{}{\sum_{v \in V}^{}o_{dv}}$$
+**(16)**
 
-#### Asignación, flujo y recursos
-**(A4)**
+$$
+w_{dvi}^{P} \geq t_{dvi} - s_{dv} - \tau_{0i}^{d} - M\left( 1 - x_{dv0i} \right)
+$$
 
-$$\sum_{d \in D}^{}{\sum_{v \in V}^{}y_{dvi}} = \delta_{i},\quad\forall i \in P$$
 
-**(A5)**
+**(17)**
 
-$$\sum_{d \in D}^{}z_{dv} \leq 1,\quad y_{dvi} \leq z_{dv}$$
+$$
+w_{dvj}^{P} \geq t_{dvj} - t_{dvi} - h_{i} - \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)
+$$
 
-**(A6)**
 
-$$\sum_{j \in P}^{}x_{dv0j} = \sum_{i \in P}^{}x_{dvi0} = z_{dv}$$
+**(18)**
 
-**(A7)**
+$$
+o_{dv} \geq t_{dvi} + h_{i} + \tau_{i0}^{d} - s_{dv} - M\left( 1 - x_{dvi0} \right)
+$$
 
-$$\sum_{j \neq i}^{}x_{dvji} = \sum_{j \neq i}^{}x_{dvij} = y_{dvi}$$
 
-**(A8)**
+#### G. Dominio de las variables
 
-$$\sum_{i \in P}^{}{\bar{q}}_{i}y_{dvi} \leq Q_{v}z_{dv}$$
+La ecuación (19) declara las variables binarias de asignación y recorrido y los dominios continuos/no negativos de los tiempos.
 
-**(A9)**
+**(19)**
 
-$$\sum_{v \in V}^{}{\sum_{i \in P}^{}q_{ik}}y_{dvi} \leq S_{dk}$$
+$$
+z_{dv},y_{dvi},x_{dvij} \in \{ 0,1\};\quad t,s,w^{D},w^{P},o \geq 0
+$$
 
-#### Tiempos, esperas y dominios
-**(A10)**
 
-$$t_{dvi} \geq s_{dv} + \tau_{0i}^{d} - M\left( 1 - x_{dv0i} \right)$$
-
-**(A11)**
-
-$$t_{dvj} \geq t_{dvi} + h_{i} + \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)$$
-
-**(A12)**
-
-$$t_{dvi} + h_{i} + \tau_{i0}^{d} \leq T_{f} + M\left( 1 - x_{dvi0} \right)$$
-
-**(A13)**
-
-$$a_{i} \leq t_{dvi} \leq b_{i} - h_{i},\quad T_{0} \leq s_{dv} \leq T_{f}$$
-
-**(A14)**
-
-$$w_{dv}^{D} = s_{dv} - T_{0}$$
-
-**(A15)**
-
-$$s_{dv} \leq T_{0} + \left( T_{f} - T_{0} \right)z_{dv},\quad w_{dv}^{D} \leq \left( T_{f} - T_{0} \right)z_{dv}$$
-
-**(A16)**
-
-$$w_{dvi}^{P} \geq t_{dvi} - s_{dv} - \tau_{0i}^{d} - M\left( 1 - x_{dv0i} \right)$$
-
-**(A17)**
-
-$$w_{dvj}^{P} \geq t_{dvj} - t_{dvi} - h_{i} - \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)$$
-
-**(A18)**
-
-$$o_{dv} \geq t_{dvi} + h_{i} + \tau_{i0}^{d} - s_{dv} - M\left( 1 - x_{dvi0} \right)$$
-
-**(A19)**
-
-$$z_{dv},y_{dvi},x_{dvij} \in \{ 0,1\};\quad t,s,w^{D},w^{P},o \geq 0$$
-
-</details>
-
+El modelo se clasifica como programación entera mixta. Las duraciones y distancias OSRM son parámetros; la asignación, los arcos y los horarios constituyen decisiones del modelo.
 ## 2.4 Implementación y verificación
 
 La aplicación utiliza Java, Spring Boot, OR-Tools 9.12.4544 con SCIP,
