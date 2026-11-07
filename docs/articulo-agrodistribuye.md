@@ -244,68 +244,78 @@ código Java; valores simulados salvo matriz OSRM.
 | α, β, γ          | COP/min     | B: α=50,100,300 y β=200; C: γ=50,100,200           |
 | A_d, N_d         | conjuntos   | 72 arcos dirigidos y 9 nodos locales por depósito  |
 
-### Formulación resumida: nueve ecuaciones clave
-La formulación completa se conserva en el apartado desplegable al final de esta subsección. En el texto principal se muestran las expresiones necesarias para entender las decisiones y las restricciones de AgroDistribuye.
+### Formulación esencial: siete ecuaciones clave
+
+El modelo se expresa de forma resumida en siete ecuaciones que describen la función objetivo y las principales condiciones de atención, continuidad, capacidad, inventario y ventanas horarias. Las 19 expresiones del modelo completo se conservan en el anexo desplegable de esta página y en el documento descargable.
 
 #### A. Función objetivo
-El escenario A minimiza los costos fijos de los vehículos y el costo por distancia recorrida.
+
+El escenario A minimiza el costo fijo de los vehículos y el costo por distancia recorrida.
+
 **(1)**
 
-$$\min Z_{A} = \sum_{d \in D}^{}{\sum_{v \in V}^{}F_{v}}z_{dv} + \sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{(i,j) \in A_{d}}^{}c_{v}}}L_{ij}^{d}x_{dvij}$$
+$$
+\min Z_{A} = \sum_{d \in D}^{}{\sum_{v \in V}^{}F_{v}}z_{dv} + \sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{(i,j) \in A_{d}}^{}c_{v}}}L_{ij}^{d}x_{dvij}
+$$
 
 
-Los escenarios B y C agregan penalizaciones temporales simuladas; estos valores son funciones objetivo de comparación y no gastos empresariales observados.
+Los escenarios B y C agregan penalizaciones simuladas por espera o tiempo de operación; sus expresiones están en el anexo, pues no representan gastos empresariales observados.
+
+#### B. Cobertura, flujos y recursos
+
+Cada productor con demanda positiva se atiende una vez y las entradas y salidas del vehículo conservan el flujo.
+
 **(2)**
 
-$$Z_{B} = Z_{A} + \alpha\sum_{d \in D}^{}{\sum_{v \in V}^{}w_{dv}^{D}} + \beta\sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{i \in P}^{}w_{dvi}^{P}}}$$
-
+$$
+\sum_{d \in D}^{}{\sum_{v \in V}^{}y_{dvi}} = \delta_{i},\quad\forall i \in P
+$$
 
 **(3)**
 
-$$Z_{C} = Z_{A} + \gamma\sum_{d \in D}^{}{\sum_{v \in V}^{}o_{dv}}$$
+$$
+\sum_{j \neq i}^{}x_{dvji} = \sum_{j \neq i}^{}x_{dvij} = y_{dvi}
+$$
 
 
-#### B. Atención, continuidad y recursos
-Cada productor con demanda positiva debe ser atendido exactamente una vez, y cada visita debe conservar el flujo de recorrido.
+La carga por vehículo y los productos disponibles en cada depósito imponen los siguientes límites:
+
 **(4)**
 
-$$\sum_{d \in D}^{}{\sum_{v \in V}^{}y_{dvi}} = \delta_{i},\quad\forall i \in P$$
-
+$$
+\sum_{i \in P}^{}{\bar{q}}_{i}y_{dvi} \leq Q_{v}z_{dv}
+$$
 
 **(5)**
 
-$$\sum_{j \neq i}^{}x_{dvji} = \sum_{j \neq i}^{}x_{dvij} = y_{dvi}$$
-
-
-Las capacidades de los vehículos y las existencias de cada producto en los depósitos limitan las asignaciones.
-**(6)**
-
-$$\sum_{i \in P}^{}{\bar{q}}_{i}y_{dvi} \leq Q_{v}z_{dv}$$
-
-
-**(7)**
-
-$$\sum_{v \in V}^{}{\sum_{i \in P}^{}q_{ik}}y_{dvi} \leq S_{dk}$$
+$$
+\sum_{v \in V}^{}{\sum_{i \in P}^{}q_{ik}}y_{dvi} \leq S_{dk}
+$$
 
 
 #### C. Viabilidad temporal
-El inicio de un servicio depende de la duración del servicio anterior y del desplazamiento, y cada visita debe respetar su ventana de atención.
-**(8)**
 
-$$t_{dvj} \geq t_{dvi} + h_{i} + \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)$$
+La atención de cada productor depende del servicio previo y de la duración del desplazamiento, y debe finalizar dentro de su ventana horaria.
+
+**(6)**
+
+$$
+t_{dvj} \geq t_{dvi} + h_{i} + \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)
+$$
+
+**(7)**
+
+$$
+a_{i} \leq t_{dvi} \leq b_{i} - h_{i},\quad T_{0} \leq s_{dv} \leq T_{f}
+$$
 
 
-**(9)**
-
-$$a_{i} \leq t_{dvi} \leq b_{i} - h_{i},\quad T_{0} \leq s_{dv} \leq T_{f}$$
-
-
-Las restricciones restantes comprueban la activación, salida y regreso de cada vehículo, el cierre de jornada, la espera, la duración y los dominios de variables.
+Las restantes restricciones sobre activación, salida y retorno a depósito, espera, cierre de jornada y dominio se mantienen en el modelo y se documentan a continuación.
 
 <details>
-<summary><strong>Anexo técnico: ver formulación completa (19 ecuaciones)</strong></summary>
+<summary><strong>Anexo técnico: formulación matemática completa (19 ecuaciones)</strong></summary>
 
-Estas expresiones reproducen la formulación extendida del documento. La numeración A1–A19 corresponde al anexo técnico del PDF y Word.
+Estas 19 expresiones reproducen la formulación extendida del artículo y del modelo implementado. Las referencias A1–A19 son la numeración auxiliar del anexo.
 
 #### Objetivos
 **(A1)**
@@ -388,7 +398,6 @@ $$z_{dv},y_{dvi},x_{dvij} \in \{ 0,1\};\quad t,s,w^{D},w^{P},o \geq 0$$
 
 </details>
 
-El nodo 0 representa el depósito correspondiente a cada par depósito–vehículo. El modelo utiliza demandas en toneladas, distancias en kilómetros y tiempos en minutos; se clasifica como programación entera mixta (MILP). La salida se fija a las 07:00 en A y es flexible en los escenarios B y C. Las esperas y duraciones presentadas al usuario se reconstruyen a partir de las rutas.
 ## 2.4 Implementación y verificación
 
 La aplicación utiliza Java, Spring Boot, OR-Tools 9.12.4544 con SCIP,
