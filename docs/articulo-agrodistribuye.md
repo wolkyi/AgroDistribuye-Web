@@ -136,13 +136,7 @@ sensibilidad paramétrica.
 
 ## 2.1 Sistema, proceso y supuestos
 
-Se estudia una jornada determinística de 07:00 a 18:00. La red incluye
-C1 Alfagro Distribuciones, C2 Grupo Surticampo SAS y C3 Conutrir–Los
-Pinos como depósitos candidatos; P1 Cajete, P2 Calibío, P3 Julumito, P4
-Pueblillo, P5 Puelenje, P6 Río Blanco, P7 Vereda de Torres y P8 La
-Cabuyera como referencias de entrega. Los nombres de comercios no
-prueban disponibilidad de bodegas, inventario o aval. Las coordenadas
-rurales son centros de referencia, no fincas.
+Se estudia una jornada determinística de 07:00 a 18:00. La red utiliza tres nodos de despacho con identificadores genéricos: C1 (Distribuidora A), C2 (Distribuidora B) y C3 (Distribuidora C). Se incluyen ocho puntos rurales de referencia: P1 Cajete, P2 Calibío, P3 Julumito, P4 Pueblillo, P5 Puelenje, P6 Río Blanco, P7 Vereda de Torres y P8 La Cabuyera. Las distribuidoras son denominaciones ficticias y no representan organizaciones participantes. Sus ubicaciones son referencias geográficas para la simulación, no instalaciones operativas verificadas. Los puntos rurales representan centros poblados, no fincas individuales.
 
 La figura 1 representa el flujo logístico desde las categorías de
 insumos hasta los puntos rurales de referencia; no implica relaciones
@@ -446,7 +440,7 @@ contraste con AgroDistribuyeMdvRPTW.java.
 |------------------------------|-------------------------------------------------------------------------------------------------------------------|---------------------|
 | **Atención y demanda**       | P1–P8 aparecen una vez cada uno; 36,5 t entregadas = 36,5 t solicitadas.                                          | Cumple              |
 | **Capacidad por vehículo**   | Cinco rutas: 4,6/5; 8,9/10; 3,7/5; 9,9/10 y 9,4/10 t. Uso máximo: 99 %.                                           | Cumple              |
-| **Inventario por producto**  | Las 12 combinaciones depósito–producto cumplen uso ≤ existencias. Menor saldo: 0,2 t de semillas en Alfagro.      | Cumple              |
+| **Inventario por producto**  | Las 12 combinaciones depósito–producto cumplen uso ≤ existencias. Menor saldo: 0,2 t de semillas en Distribuidora A.      | Cumple              |
 | **Depósito y continuidad**   | Cinco circuitos completos: cada vehículo sale de un depósito y retorna al mismo, sin repetir productor.           | Cumple              |
 | **Ventanas de servicio**     | Los ocho servicios comienzan y terminan dentro de las ventanas simuladas de sus productores.                      | Cumple              |
 | **Jornada de reparto**       | Cinco salidas a las 07:00; último regreso a las 17:06, antes del límite de las 18:00.                             | Cumple              |
@@ -520,11 +514,11 @@ la tabla 7.
 
 | Depósito               | Vehículo   | Paradas | Carga (t) | Km    | Costo (COP) |
 |------------------------|------------|---------|-----------|-------|-------------|
-| Alfagro Distribuciones | V3-Pequeno | P6      | 4,60      | 21,06 | 107.904     |
-| Alfagro Distribuciones | V6-Grande  | P3, P1  | 8,90      | 25,29 | 173.222     |
-| Grupo Surticampo SAS   | V2-Pequeno | P4      | 3,70      | 7,16  | 82.883      |
-| Grupo Surticampo SAS   | V4-Grande  | P7, P5  | 9,90      | 12,58 | 141.452     |
-| Conutrir - Los Pinos   | V5-Grande  | P2, P8  | 9,40      | 17,12 | 152.795     |
+| Distribuidora A | V3-Pequeno | P6      | 4,60      | 21,06 | 107.904     |
+| Distribuidora A | V6-Grande  | P3, P1  | 8,90      | 25,29 | 173.222     |
+| Distribuidora B   | V2-Pequeno | P4      | 3,70      | 7,16  | 82.883      |
+| Distribuidora B   | V4-Grande  | P7, P5  | 9,90      | 12,58 | 141.452     |
+| Distribuidora C   | V5-Grande  | P2, P8  | 9,40      | 17,12 | 152.795     |
 
 Tabla 7. Rutas de la última ejecución. Fuente:
 data/ultima-ejecucion-v8.json.
