@@ -1,0 +1,113 @@
+{
+  "municipality": "Popayán, Cauca, Colombia",
+  "coordinateSystem": "WGS84",
+  "sourceNote": "Centros poblados rurales: puntos de referencia publicados por el Servicio Geológico Colombiano. No son coordenadas de predios o entradas de fincas.",
+  "depots": [
+    {
+      "id": "C1",
+      "name": "Alfagro Distribuciones",
+      "address": "Cra. 6A #9N-62, Popayán, Cauca",
+      "dataStatus": "USER_PROVIDED_COORDINATE",
+      "role": "Candidato de depósito; capacidad e inventario por validar",
+      "source": "Directorio comercial consultado",
+      "latitude": 2.449371790947889,
+      "longitude": -76.60225432081373,
+      "coordinateNote": "Coordenada proporcionada por el usuario; validar que corresponda al acceso operativo."
+    },
+    {
+      "id": "C2",
+      "name": "Grupo Surticampo SAS",
+      "address": "Cra. 6 #5N-46 B, Barrio Bolívar, Popayán, Cauca",
+      "dataStatus": "USER_PROVIDED_COORDINATE",
+      "role": "Candidato de depósito; capacidad e inventario por validar",
+      "source": "Directorio comercial consultado",
+      "latitude": 2.448775892614762,
+      "longitude": -76.60170816842958,
+      "coordinateNote": "Coordenada proporcionada por el usuario; validar que corresponda al acceso operativo."
+    },
+    {
+      "id": "C3",
+      "name": "Conutrir – Bodega 5, Parque Comercial Empresarial Los Pinos",
+      "address": "Cra. 9 #76N-19, Bodega 5, Popayán, Cauca",
+      "dataStatus": "USER_PROVIDED_COORDINATE",
+      "role": "Punto de distribución candidato; confirmar autorización y operación como depósito",
+      "source": "Página oficial de contacto",
+      "latitude": 2.488665777025983,
+      "longitude": -76.56050874141953,
+      "coordinateNote": "Coordenada proporcionada por el usuario; validar que corresponda al acceso operativo."
+    }
+  ],
+  "producers": [
+    {
+      "id": "P1",
+      "name": "Cajete",
+      "latitude": 2.47733,
+      "longitude": -76.67206,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    },
+    {
+      "id": "P2",
+      "name": "Calibío",
+      "latitude": 2.5353,
+      "longitude": -76.56769,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    },
+    {
+      "id": "P3",
+      "name": "Julumito",
+      "latitude": 2.47713,
+      "longitude": -76.64577,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    },
+    {
+      "id": "P4",
+      "name": "Pueblillo",
+      "latitude": 2.44744,
+      "longitude": -76.5835,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    },
+    {
+      "id": "P5",
+      "name": "Puelenje",
+      "latitude": 2.43477,
+      "longitude": -76.62546,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    },
+    {
+      "id": "P6",
+      "name": "Río Blanco",
+      "latitude": 2.5007,
+      "longitude": -76.55743,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    },
+    {
+      "id": "P7",
+      "name": "Vereda de Torres",
+      "latitude": 2.44574,
+      "longitude": -76.63679,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    },
+    {
+      "id": "P8",
+      "name": "La Cabuyera",
+      "latitude": 2.5259,
+      "longitude": -76.55192,
+      "dataStatus": "REFERENCE_POINT",
+      "source": "SGC"
+    }
+  ],
+  "routing": {
+    "status": "MATRIX_ENDPOINT_AVAILABLE_NOT_YET_CONNECTED_TO_OPTIMIZER",
+    "provider": "OSRM public demo over OpenStreetMap",
+    "matrixEndpoint": "GET /api/geografia/matriz-vial",
+    "matrixDimensions": "11x11",
+    "note": "P1-P8 son puntos de referencia de centros poblados. La matriz debe revisarse antes de conectarla al optimizador."
+  }
+}

@@ -1,0 +1,715 @@
+{
+  "status": "OK",
+  "provider": "OpenStreetMap road network via OSRM public demo",
+  "profile": "driving",
+  "generatedAt": "2026-11-07T00:43:45.527278800-05:00",
+  "note": "Distances are fastest-route distances; durations are estimated travel times. Public demo is for light use.",
+  "points": [
+    {
+      "id": "C1",
+      "name": "Alfagro Distribuciones",
+      "latitude": 2.449371790947889,
+      "longitude": -76.60225432081373,
+      "dataStatus": "USER_PROVIDED_COORDINATE"
+    },
+    {
+      "id": "C2",
+      "name": "Grupo Surticampo SAS",
+      "latitude": 2.448775892614762,
+      "longitude": -76.60170816842958,
+      "dataStatus": "USER_PROVIDED_COORDINATE"
+    },
+    {
+      "id": "C3",
+      "name": "Conutrir - Bodega 5, Los Pinos",
+      "latitude": 2.488665777025983,
+      "longitude": -76.56050874141953,
+      "dataStatus": "USER_PROVIDED_COORDINATE"
+    },
+    {
+      "id": "P1",
+      "name": "Cajete",
+      "latitude": 2.47733,
+      "longitude": -76.67206,
+      "dataStatus": "REFERENCE_POINT"
+    },
+    {
+      "id": "P2",
+      "name": "Calibio",
+      "latitude": 2.5353,
+      "longitude": -76.56769,
+      "dataStatus": "REFERENCE_POINT"
+    },
+    {
+      "id": "P3",
+      "name": "Julumito",
+      "latitude": 2.47713,
+      "longitude": -76.64577,
+      "dataStatus": "REFERENCE_POINT"
+    },
+    {
+      "id": "P4",
+      "name": "Pueblillo",
+      "latitude": 2.44744,
+      "longitude": -76.5835,
+      "dataStatus": "REFERENCE_POINT"
+    },
+    {
+      "id": "P5",
+      "name": "Puelenje",
+      "latitude": 2.43477,
+      "longitude": -76.62546,
+      "dataStatus": "REFERENCE_POINT"
+    },
+    {
+      "id": "P6",
+      "name": "Rio Blanco",
+      "latitude": 2.5007,
+      "longitude": -76.55743,
+      "dataStatus": "REFERENCE_POINT"
+    },
+    {
+      "id": "P7",
+      "name": "Vereda de Torres",
+      "latitude": 2.44574,
+      "longitude": -76.63679,
+      "dataStatus": "REFERENCE_POINT"
+    },
+    {
+      "id": "P8",
+      "name": "La Cabuyera",
+      "latitude": 2.5259,
+      "longitude": -76.55192,
+      "dataStatus": "REFERENCE_POINT"
+    }
+  ],
+  "matrix": [
+    [
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.774,
+        "durationMinutes": 1.84,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.747,
+        "durationMinutes": 11.4,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 10.252,
+        "durationMinutes": 13.73,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.287,
+        "durationMinutes": 23.16,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.019,
+        "durationMinutes": 13.94,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 3.369,
+        "durationMinutes": 5.01,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 4.47,
+        "durationMinutes": 6.58,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 11.787,
+        "durationMinutes": 15.39,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 5.386,
+        "durationMinutes": 9.24,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.679,
+        "durationMinutes": 18.79,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 1.032,
+        "durationMinutes": 2.03,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.738,
+        "durationMinutes": 11.79,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 10.655,
+        "durationMinutes": 14.71,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.279,
+        "durationMinutes": 23.56,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.422,
+        "durationMinutes": 14.93,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 3.361,
+        "durationMinutes": 5.41,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 4.873,
+        "durationMinutes": 7.57,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 11.779,
+        "durationMinutes": 15.78,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 5.789,
+        "durationMinutes": 10.22,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.67,
+        "durationMinutes": 19.19,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 7.888,
+        "durationMinutes": 11.1,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.994,
+        "durationMinutes": 11.59,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 16.711,
+        "durationMinutes": 22.98,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 9.541,
+        "durationMinutes": 14.95,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 14.479,
+        "durationMinutes": 23.19,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.832,
+        "durationMinutes": 11.55,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 11.69,
+        "durationMinutes": 16.33,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 6.041,
+        "durationMinutes": 7.17,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 11.807,
+        "durationMinutes": 18.67,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.933,
+        "durationMinutes": 10.58,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 10.026,
+        "durationMinutes": 13.21,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 10.132,
+        "durationMinutes": 13.9,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 17.136,
+        "durationMinutes": 24.22,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 24.677,
+        "durationMinutes": 35.99,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.301,
+        "durationMinutes": 12.25,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.396,
+        "durationMinutes": 18.22,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.289,
+        "durationMinutes": 11.92,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 21.177,
+        "durationMinutes": 28.21,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 6.533,
+        "durationMinutes": 9.02,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 23.069,
+        "durationMinutes": 31.62,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 15.365,
+        "durationMinutes": 21.42,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.471,
+        "durationMinutes": 21.91,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.577,
+        "durationMinutes": 10.94,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 23.51,
+        "durationMinutes": 33.24,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 21.277,
+        "durationMinutes": 33.46,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.309,
+        "durationMinutes": 21.87,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 19.167,
+        "durationMinutes": 26.65,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 6.094,
+        "durationMinutes": 8.82,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 19.284,
+        "durationMinutes": 28.99,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 2.156,
+        "durationMinutes": 5.23,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 8.043,
+        "durationMinutes": 14.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.149,
+        "durationMinutes": 14.68,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.153,
+        "durationMinutes": 25.01,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.244,
+        "durationMinutes": 12.24,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 22.693,
+        "durationMinutes": 36.78,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 11.412,
+        "durationMinutes": 19.01,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 6.306,
+        "durationMinutes": 12.71,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 19.193,
+        "durationMinutes": 29.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 4.549,
+        "durationMinutes": 9.81,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 21.085,
+        "durationMinutes": 32.41,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 3.858,
+        "durationMinutes": 5.75,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 3.796,
+        "durationMinutes": 5.99,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.981,
+        "durationMinutes": 12.3,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.442,
+        "durationMinutes": 18.12,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.521,
+        "durationMinutes": 24.06,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 11.21,
+        "durationMinutes": 18.33,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.104,
+        "durationMinutes": 10.94,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 12.021,
+        "durationMinutes": 16.29,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 10.055,
+        "durationMinutes": 13.58,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.913,
+        "durationMinutes": 19.7,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 4.562,
+        "durationMinutes": 6.08,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 4.668,
+        "durationMinutes": 6.77,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 11.554,
+        "durationMinutes": 17.34,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.311,
+        "durationMinutes": 12.08,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 19.094,
+        "durationMinutes": 29.1,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 6.079,
+        "durationMinutes": 12.29,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.285,
+        "durationMinutes": 11.08,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.594,
+        "durationMinutes": 21.33,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 2.172,
+        "durationMinutes": 4.01,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 17.486,
+        "durationMinutes": 24.73,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 9.271,
+        "durationMinutes": 12.6,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 9.377,
+        "durationMinutes": 13.09,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 1.484,
+        "durationMinutes": 2.12,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 17.416,
+        "durationMinutes": 24.42,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 7.021,
+        "durationMinutes": 11.49,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 15.184,
+        "durationMinutes": 24.64,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 9.215,
+        "durationMinutes": 13.05,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.074,
+        "durationMinutes": 17.83,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.191,
+        "durationMinutes": 20.17,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 5.413,
+        "durationMinutes": 7.12,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 4.977,
+        "durationMinutes": 7.99,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 5.084,
+        "durationMinutes": 8.68,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 12.724,
+        "durationMinutes": 19.39,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 6.555,
+        "durationMinutes": 9.14,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 20.265,
+        "durationMinutes": 31.15,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 4.323,
+        "durationMinutes": 9.36,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 8.347,
+        "durationMinutes": 13.01,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 2.124,
+        "durationMinutes": 3.95,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 16.765,
+        "durationMinutes": 23.38,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 18.656,
+        "durationMinutes": 26.79,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ],
+    [
+      {
+        "distanceKm": 13.209,
+        "durationMinutes": 16.19,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.315,
+        "durationMinutes": 16.68,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 5.421,
+        "durationMinutes": 5.71,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 21.354,
+        "durationMinutes": 28.01,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 2.939,
+        "durationMinutes": 6.99,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 19.121,
+        "durationMinutes": 28.23,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 13.153,
+        "durationMinutes": 16.64,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 17.011,
+        "durationMinutes": 21.42,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 3.937,
+        "durationMinutes": 3.59,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 17.128,
+        "durationMinutes": 23.76,
+        "status": "OSRM_ROAD_ROUTE"
+      },
+      {
+        "distanceKm": 0.0,
+        "durationMinutes": 0.0,
+        "status": "OSRM_ROAD_ROUTE"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,26 @@
+target/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Credenciales y configuración local
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Cachés y resultados generados durante la ejecución
+data/matrices/*-cache.json
+data/matrices/*.tmp
+data/ultima-ejecucion-v8.json
+resultado-experimentos.json
+verificacion-v8.json
+
+# Capturas de revisión locales
+/*.jpg
+/*.png
+
+# Estado de herramientas de modernización
+.github/modernize/
