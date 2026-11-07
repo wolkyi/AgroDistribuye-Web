@@ -631,8 +631,6 @@ captura incluida en el ZIP del proyecto v8.
 Figura 7. Vista del prototipo: mapa de rutas. Fuente: captura incluida
 en el ZIP del proyecto v8.
 
-Material complementario: [repositorio de código](https://github.com/wolkyi/AgroDistribuye-Web); [instrucciones para ejecutar la aplicación](https://github.com/wolkyi/AgroDistribuye-Web#ejecutar-en-desarrollo). No existe un enlace público verificado a una aplicación desplegada ni un video de demostración.
-
 # IV. Discusión
 
 La planificación de referencia atiende los ocho puntos con cinco de seis
@@ -781,21 +779,6 @@ para acreditarlo como Q1/Q2; los demás títulos tienen registros Q1/Q2
 consultables. No se presume que esta clasificación evalúe la calidad
 individual de cada estudio.
 
-# Nota de uso de inteligencia artificial
+# Anexo A. Alcance y reproducibilidad
 
-Se utilizó asistencia de inteligencia artificial para estructurar y
-redactar el artículo, resumir los archivos del proyecto, producir tablas
-y diseñar el póster. Los resultados numéricos proceden de los JSON
-incluidos en el ZIP y no de ejecuciones nuevas del solver. El equipo
-debe revisar, corregir y validar toda afirmación y referencia antes de
-entregar.
-
-# Anexo A. Recursos digitales y límites de publicación
-
-- Repositorio de código y datos de ejemplo: https://github.com/wolkyi/AgroDistribuye-Web
-- Instrucciones de ejecución local y demostración sin internet: https://github.com/wolkyi/AgroDistribuye-Web#ejecutar-en-desarrollo
-- Versión web del artículo: https://github.com/wolkyi/AgroDistribuye-Web/blob/main/docs/articulo-agrodistribuye.md
-- La aplicación no está publicada en un servidor de acceso público y no se ha facilitado un enlace de video.
-- La implementación equivalente del mismo MDVRPTW en Julia/JuMP y la validación cruzada con otro solucionador siguen sin acreditarse.
-
-El docente autorizó utilizar datos simulados para el proyecto académico. Las cifras económicas no representan ahorros empresariales observados.
+El docente autorizó utilizar datos simulados para el proyecto académico. Las cifras económicas no representan ahorros empresariales observados. El modelo Java se documenta con su código fuente, los archivos de ejemplo y los resultados registrados; no se acredita una implementación independiente equivalente en Julia/JuMP ni una validación cruzada del mismo problema.
