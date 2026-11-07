@@ -490,6 +490,25 @@ sin exigir conocimientos de programación al usuario final.
 Figura 2. Arquitectura funcional de AgroDistribuye. Fuente: elaboración
 propia con base en el código de la versión v8.
 
+## 2.7 Línea base operativa simulada sin optimización global
+
+Para disponer de un referente comparable sin atribuir datos a ninguna empresa, se construyó una línea base heurística determinista e independiente del solucionador MILP. La regla ordena P1–P8 por apertura de ventana y código (P1, P3, P7, P2, P4, P5, P8 y P6); inserta cada visita en el primer vehículo activo que conserve capacidad, existencias, horario y retorno antes de las 18:00 y, si no cabe, activa el primer vehículo libre desde el depósito factible más cercano. Las rutas se construyen sin minimización global ni búsqueda local y parten a las 07:00.
+
+Se emplean exactamente las mismas demandas, flota, costos fijos y por km, inventarios, ventanas, servicios y matriz OSRM de 11 × 11 nodos que en el escenario A. Esta línea base se denomina **LB-HEURÍSTICA**: no es un plan real observado ni debe confundirse con `A_BASELINE`, que es la solución de referencia del MILP de la aplicación.
+
+| Vehículo | Distribuidora | Visitas | Carga (t) | Km | Costo (COP) |
+|---|---|---|---:|---:|---:|
+| V1 | A | P1 | 4,60 | 20,278 | 106.500,40 |
+| V2 | A | P3 | 4,30 | 16,062 | 98.911,60 |
+| V3 | A | P7 | 5,00 | 10,363 | 88.653,40 |
+| V4 | C | P2, P4 | 8,10 | 32,831 | 192.077,50 |
+| V5 | B | P5, P8 | 9,90 | 35,674 | 199.185,00 |
+| V6 | B | P6 | 4,60 | 21,156 | 162.890,00 |
+
+**Tabla 7.** Rutas de la línea base heurística. Fuente: paquete de verificación reproducible del paso 2.
+
+Las seis rutas son factibles en las restricciones auditadas, suman 136,364 km, COP 848.217,90 y 36,5 t atendidas. En la línea base se acumulan 199,08 minutos-vehículo de conducción, 260 de servicio y 1.012,92 de espera ante productores. Estos resultados son simulados, no ahorros comprobados en una empresa.
+
 # III. Resultados
 
 ## 3.1 Tamaño de instancia
@@ -510,7 +529,7 @@ FEASIBLE_NEAR_OPTIMAL (factible cercana al óptimo), validación interna
 positiva, costo de COP 658.257, 83,20 km, 5 vehículos y 8 puntos
 atendidos; tiempo de solución 5,87 s. El estado no demuestra optimalidad
 global. Las asignaciones por vehículo de esta ejecución se muestran en
-la tabla 7.
+la tabla 8.
 
 | Depósito               | Vehículo   | Paradas | Carga (t) | Km    | Costo (COP) |
 |------------------------|------------|---------|-----------|-------|-------------|
@@ -520,7 +539,7 @@ la tabla 7.
 | Distribuidora B   | V4-Grande  | P7, P5  | 9,90      | 12,58 | 141.452     |
 | Distribuidora C   | V5-Grande  | P2, P8  | 9,40      | 17,12 | 152.795     |
 
-Tabla 7. Rutas de la última ejecución. Fuente:
+Tabla 8. Rutas de la última ejecución. Fuente:
 data/ultima-ejecucion-v8.json.
 
 Como se resume en la tabla 5, la auditoría de los datos guardados
@@ -531,6 +550,29 @@ de espera en productores, equivalentes a 1.826,52 min de operación
 agregada. Estos tiempos suman la actividad de los vehículos y no
 constituyen la duración de una sola jornada.
 
+### Contraste cuantitativo: línea base heurística frente al MILP
+
+La tabla 9 compara las dos políticas simuladas de la misma jornada. La diferencia es el resultado MILP menos la línea base, y el cambio porcentual se calcula dividiendo la diferencia entre el valor de la línea base.
+
+| Indicador | LB-HEURÍSTICA | Modelo MILP | Diferencia | Cambio |
+|---|---:|---:|---:|---:|
+| Costo total (COP) | 848.217,90 | 658.257,00 | −189.960,90 | −22,40 % |
+| Costos fijos (COP) | 540.000,00 | 470.000,00 | −70.000,00 | −12,96 % |
+| Costos variables (COP) | 308.217,90 | 188.257,00 | −119.960,90 | −38,92 % |
+| Distancia (km) | 136,364 | 83,203 | −53,161 | −38,98 % |
+| Vehículos activos | 6 | 5 | −1 | −16,67 % |
+| Conducción (min-veh.) | 199,08 | 125,61 | −73,47 | −36,90 % |
+| Espera productores (min-veh.) | 1.012,92 | 1.440,91 | +427,99 | +42,25 % |
+| Operación total (min-veh.) | 1.472,00 | 1.826,52 | +354,52 | +24,08 % |
+| Demanda (t) | 36,5 | 36,5 | 0 | 0 % |
+| Productores atendidos | 8 de 8 | 8 de 8 | 0 | 0 % |
+
+**Tabla 9.** Contraste LB-HEURÍSTICA frente al escenario A. Fuente: paquete del paso 2 y ejecución MILP archivada.
+
+La diferencia de COP 189.960,90 se descompone en COP 70.000,00 menos de costos fijos (36,85 % del total de la diferencia) por utilizar un vehículo menos y COP 119.960,90 menos de costos variables (63,15 %). Estos últimos reflejan menos kilómetros y una composición heterogénea distinta, con tarifas de COP 1.800 o 2.500/km; no pueden atribuirse exclusivamente a la reducción de distancia.
+
+La conducción disminuye 36,90 %, pero la espera en productores aumenta 42,25 % y, con ello, la operación acumulada aumenta 24,08 %. El escenario A minimiza costo logístico, no espera; por tanto, no mejora todos los indicadores. Ambas políticas atienden los ocho puntos con demanda total de 36,5 t y respetan las restricciones auditadas. No se infieren ahorros empresariales reales ni optimalidad global certificada a partir de esta comparación.
+
 ## 3.3 Comparación entre herramientas
 
 | Herramienta              | Solver    | Objetivo (COP) | Tiempo        | Estado                |
@@ -539,7 +581,7 @@ constituyen la duración de una sola jornada.
 | Julia / JuMP             | Pendiente | No disponible  | No disponible | Sin ejecutar          |
 | Herramienta de contraste | Pendiente | No disponible  | No disponible | Sin ejecutar          |
 
-Tabla 8. Estado de verificación entre herramientas; no existe
+Tabla 10. Estado de verificación entre herramientas; no existe
 coincidencia acreditada.
 
 ## 3.4 Alternativas y escenarios temporales
@@ -556,7 +598,7 @@ coincidencia acreditada.
 | ALT EXTRA VEHICLE | Óptimo           | 658.257   | 658.257      | 83,20 |
 | ALT CAPACITY      | Factible cercana | 733.257   | 733.257      | 83,20 |
 
-Tabla 9. Comparación de escenarios. Fuente: última ejecución; las
+Tabla 11. Comparación de escenarios. Fuente: última ejecución; las
 funciones objetivo difieren entre familias.
 
 Agregar un vehículo mantuvo el costo base registrado en COP 658.257;
@@ -602,14 +644,14 @@ registro de ejecución v8.
 | costPerKm | 0,80   | FEASIBLE_NEAR_OPTIMAL | 620.606                     |
 | costPerKm | 1,20   | FEASIBLE_NEAR_OPTIMAL | 695.908                     |
 
-Tabla 10. Sensibilidad ±20 %. Fuente: ejecución registrada.
+Tabla 12. Sensibilidad ±20 %. Fuente: ejecución registrada.
 
 La demanda +20 % y la capacidad −20 % resultaron infactibles en la
 ejecución almacenada. Dado que varias corridas terminan como factibles
 sin certificación de óptimo, sus diferencias de costo son resultados
 observados del solver, no curvas exactas de valor óptimo.
 
-La figura 5 visualiza la sensibilidad de la tabla 10. Los escenarios
+La figura 5 visualiza la sensibilidad de la tabla 12. Los escenarios
 señalados como infactibles carecen de costo de solución y por ello no se
 grafican con valor cero. Los puntos representan valores obtenidos en
 ejecuciones almacenadas, algunos sin certificado de optimalidad global.
@@ -639,22 +681,9 @@ en el ZIP del proyecto v8.
 
 # IV. Discusión
 
-La planificación de referencia atiende los ocho puntos con cinco de seis
-vehículos y 36,5 t de demanda. Las restricciones temporales generan
-esperas acumuladas elevadas cuando la salida está fijada a las 07:00. La
-programación flexible puede trasladar espera al depósito y reducir
-espera en destino, aunque los experimentos B y C modifican la función
-objetivo y no representan ahorros empresariales observados.
+El contraste con LB-HEURÍSTICA muestra reducciones simuladas de 22,40 % en costo y 38,98 % en distancia, con un vehículo menos y cobertura completa. Los COP 70.000 de costos fijos evitados son atribuibles a menor activación de flota; los COP 119.960,90 restantes corresponden a costos variables de recorridos más cortos y tipos de vehículos diferentes. Estas magnitudes se refieren a una regla constructiva reproducible, no a la operación observada de una empresa ni a todas las heurísticas posibles.
 
-Los antecedentes permiten interpretar el aporte, pero no establecer
-ahorros empresariales comparables. Fernando et al. (2024) trabajaron con
-una cadena minorista de gran escala y reportaron mejoras frente a una
-operación observada; Rojas-Cuevas et al. (2025) documentaron un ahorro
-de 40 % de combustible en un caso de entregas y devoluciones con centro
-de servicio. En AgroDistribuye, por el contrario, el costo de COP
-658.257 corresponde a parámetros simulados y no existe una medición
-equivalente de la situación actual. Por tanto, se demuestra factibilidad
-técnica de la planificación, no un porcentaje de ahorro real.
+La contrapartida es temporal: la conducción cae 36,90 %, mientras la espera en productores aumenta 42,25 %. En A, cada vehículo puede llegar pronto a su siguiente parada y aguardar la apertura de su ventana, porque la espera no integra la función objetivo de costo. Los tiempos agregados son minutos-vehículo y no la duración de una sola jornada. Fernando et al. (2024) compararon con una operación real, mientras que en este trabajo solo se mide mejora respecto a una línea base académica simulada.
 
 La dificultad de solución exacta observada por Hajba et al. (2024) y
 Rojas-Cuevas et al. (2025) también contextualiza la brecha de
@@ -694,11 +723,9 @@ validación cruzada Julia/contraste y aval institucional.
 
 # V. Conclusiones
 
-Se construyó un prototipo funcional de ruteo multidepósito con ventanas
-horarias que permite analizar una jornada agrícola simulada en Popayán.
-En la ejecución conservada se obtuvo una solución factible cercana al
-óptimo, con cinco vehículos, 83,203 km y COP 658.257 de costo logístico
-modelado, para ocho puntos y 36,5 t.
+Se desarrolló un prototipo académico de ruteo multidepósito con ventanas horarias. Para la misma jornada simulada, LB-HEURÍSTICA empleó seis vehículos, recorrió 136,364 km y costó COP 848.217,90; el escenario A del MILP empleó cinco vehículos, recorrió 83,203 km y costó COP 658.257,00, con cobertura completa de 8 puntos y 36,5 t. La diferencia fue de −22,40 % en costo y −38,98 % en distancia, aunque no se certifica optimalidad global.
+
+La reducción simulada del costo se desglosa en COP 70.000 de costos fijos y COP 119.960,90 de costos variables. El aumento de 427,99 minutos-vehículo de espera ante productores es un costo temporal de oportunidad que impide afirmar mejoras en todos los indicadores. La comparación no constituye una medición de ahorros reales de una organización.
 
 La sensibilidad registrada revela infactibilidad ante +20 % de demanda y
 −20 % de capacidad; la adición de un vehículo no modificó el costo base
