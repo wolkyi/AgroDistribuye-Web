@@ -14,5 +14,7 @@ class CatalogServiceTest {
         assertEquals(8, response.customers().size());
         assertEquals(4, response.products().size());
         assertEquals(6, response.vehicles().size());
+        for (var depot : response.depots()) assertEquals(NodeNames.name(depot.id()), depot.name());
+        for (var customer : response.customers()) assertEquals(NodeNames.name(customer.id()), customer.name());
     }
 }

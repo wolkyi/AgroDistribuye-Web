@@ -4,6 +4,8 @@ Aplicación académica de apoyo a decisiones para distribución agrícola en Pop
 
 Los datos operativos y económicos del ejemplo son simulados. Las coordenadas de productores son referencias rurales; los depósitos son candidatos cuya operación debe validarse. El escenario A es una referencia del modelo y no la operación real de una organización.
 
+La app utiliza nombres genéricos: C1 = Distribuidora Norte, C2 = Distribuidora Centro, C3 = Distribuidora Sur y Productor P1–P8. Las coordenadas de referencia, distancias y tiempos se conservan. Las geometrías se identifican por códigos estables, independientes del nombre mostrado. Las ejecuciones antiguas guardadas en el navegador deben recalcularse para usar la nueva nomenclatura.
+
 ## Ejecutar en desarrollo
 
 Requisitos: Java 25 o superior (verificado con JDK 26), Maven 3.9+ y dependencias descargadas la primera vez.

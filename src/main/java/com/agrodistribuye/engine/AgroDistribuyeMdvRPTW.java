@@ -10,6 +10,7 @@ import com.google.ortools.linearsolver.MPVariable;
 import java.util.ArrayList;
 import java.util.List;
 import com.agrodistribuye.optimization.PlanningData;
+import com.agrodistribuye.catalog.NodeNames;
 
 /**
  * Primera versión ejecutable del motor MDVRPTW de AgroDistribuye.
@@ -76,9 +77,7 @@ public final class AgroDistribuyeMdvRPTW {
     private static final int SHIFT_END = 18 * 60;    // 18:00
     private static final double BIG_M = 2_000.0;
 
-    private static final String[] DEPOT_NAMES = {
-            "Alfagro Distribuciones", "Grupo Surticampo SAS", "Conutrir - Los Pinos"
-    };
+    private static final String[] DEPOT_NAMES = NodeNames.DEPOTS.toArray(String[]::new);
     private static final String[] CUSTOMER_NAMES =
             {"P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"};
     private static final String[] PRODUCT_NAMES =

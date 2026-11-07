@@ -2,6 +2,7 @@ package com.agrodistribuye.geography;
 
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
+import com.agrodistribuye.catalog.NodeNames;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -61,7 +62,13 @@ public class GeographicMatrixService {
     }
 
     public MatrixResponse buildMatrix(boolean offline) throws Exception {
-        if (offline) return snapshots.matrix();
+        if (offline) {
+            MatrixResponse saved = snapshots.matrix();
+            List<Point> named = saved.points().stream().map(p -> new Point(p.id(), NodeNames.name(p.id()),
+                    p.latitude(), p.longitude(), p.dataStatus())).toList();
+            return new MatrixResponse(saved.status(), saved.provider(), saved.profile(), saved.generatedAt(),
+                    saved.note(), named, saved.matrix());
+        }
         MatrixResponse response = buildMatrix();
         toRoadMatrices(response);
         snapshots.saveMatrix(response);
@@ -69,7 +76,7 @@ public class GeographicMatrixService {
     }
 
     public List<List<Double>> routeCoordinates(String vehicle, String depot, List<String> stops, boolean offline) throws Exception {
-        String key = depot + "|" + String.join("|", stops);
+        String key = NodeNames.depotId(depot) + "|" + String.join("|", stops);
         List<List<Double>> saved = snapshots.geometry(key);
         if (!saved.isEmpty()) return saved;
         if (offline) return List.of();
@@ -81,25 +88,24 @@ public class GeographicMatrixService {
 
     private List<Point> points() {
         return List.of(
-            new Point("C1", "Alfagro Distribuciones", 2.449371790947889, -76.60225432081373, "USER_PROVIDED_COORDINATE"),
-            new Point("C2", "Grupo Surticampo SAS", 2.448775892614762, -76.60170816842958, "USER_PROVIDED_COORDINATE"),
-            new Point("C3", "Conutrir - Bodega 5, Los Pinos", 2.488665777025983, -76.56050874141953, "USER_PROVIDED_COORDINATE"),
-            new Point("P1", "Cajete", 2.47733, -76.67206, "REFERENCE_POINT"),
-            new Point("P2", "Calibio", 2.53530, -76.56769, "REFERENCE_POINT"),
-            new Point("P3", "Julumito", 2.47713, -76.64577, "REFERENCE_POINT"),
-            new Point("P4", "Pueblillo", 2.44744, -76.58350, "REFERENCE_POINT"),
-            new Point("P5", "Puelenje", 2.43477, -76.62546, "REFERENCE_POINT"),
-            new Point("P6", "Rio Blanco", 2.50070, -76.55743, "REFERENCE_POINT"),
-            new Point("P7", "Vereda de Torres", 2.44574, -76.63679, "REFERENCE_POINT"),
-            new Point("P8", "La Cabuyera", 2.52590, -76.55192, "REFERENCE_POINT")
+            new Point("C1", NodeNames.name("C1"), 2.449371790947889, -76.60225432081373, "USER_PROVIDED_COORDINATE"),
+            new Point("C2", NodeNames.name("C2"), 2.448775892614762, -76.60170816842958, "USER_PROVIDED_COORDINATE"),
+            new Point("C3", NodeNames.name("C3"), 2.488665777025983, -76.56050874141953, "USER_PROVIDED_COORDINATE"),
+            new Point("P1", NodeNames.name("P1"), 2.47733, -76.67206, "REFERENCE_POINT"),
+            new Point("P2", NodeNames.name("P2"), 2.53530, -76.56769, "REFERENCE_POINT"),
+            new Point("P3", NodeNames.name("P3"), 2.47713, -76.64577, "REFERENCE_POINT"),
+            new Point("P4", NodeNames.name("P4"), 2.44744, -76.58350, "REFERENCE_POINT"),
+            new Point("P5", NodeNames.name("P5"), 2.43477, -76.62546, "REFERENCE_POINT"),
+            new Point("P6", NodeNames.name("P6"), 2.50070, -76.55743, "REFERENCE_POINT"),
+            new Point("P7", NodeNames.name("P7"), 2.44574, -76.63679, "REFERENCE_POINT"),
+            new Point("P8", NodeNames.name("P8"), 2.52590, -76.55192, "REFERENCE_POINT")
         );
     }
 
     /** Solicita a OSRM la geometría vial real de una ruta ya optimizada. */
     public RouteGeometry buildRouteGeometry(String vehicle, String depotName, List<String> producerIds) throws Exception {
         List<Point> all = points();
-        String depotId = depotName.startsWith("Alfagro") ? "C1"
-                : depotName.startsWith("Grupo Surticampo") ? "C2" : "C3";
+        String depotId = NodeNames.depotId(depotName);
         List<String> ids = new ArrayList<>();
         ids.add(depotId);
         ids.addAll(producerIds);

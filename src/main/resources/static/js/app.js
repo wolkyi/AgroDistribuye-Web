@@ -152,7 +152,7 @@ function renderResult(result, response = result) {
       <p><b>Carga:</b> ${Number(route.loadTonnes).toFixed(1)} / ${Number(route.capacityTonnes).toFixed(1)} t
       &nbsp; <b>Distancia:</b> ${Number(route.distanceKm).toFixed(1)} km
       &nbsp; <b>Costo:</b> ${formatCop(route.routeCostCop)}</p>
-      <p><b>Ruta:</b> ${escapeHtml(route.depot)} → ${(route.stops || []).map(s => `${escapeHtml(s.producerId)} (${escapeHtml(s.serviceStart)}–${escapeHtml(s.serviceEnd)})`).join(' → ')} → ${escapeHtml(route.depot)}</p>
+      <p><b>Ruta:</b> ${escapeHtml(route.depot)} → ${(route.stops || []).map(s => `Productor ${escapeHtml(s.producerId)} (${escapeHtml(s.serviceStart)}–${escapeHtml(s.serviceEnd)})`).join(' → ')} → ${escapeHtml(route.depot)}</p>
       <p><b>Productos:</b> ${Object.entries(route.productLoadsTonnes || {}).map(([name,qty]) => `${escapeHtml(name)}: ${Number(qty).toFixed(1)} t`).join(' · ')}</p>
       <p><b>Salida:</b> ${escapeHtml(route.departureTime)} &nbsp; <b>Regreso al depósito:</b> ${escapeHtml(route.returnTime)}</p>
       <p><b>Espera en depósito:</b> ${Number(route.depotWaitingMinutes || 0).toFixed(1)} min &nbsp; <b>Espera en productores:</b> ${Number(route.waitingMinutes || 0).toFixed(1)} min</p>

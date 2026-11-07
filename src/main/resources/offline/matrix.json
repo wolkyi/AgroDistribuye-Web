@@ -7,77 +7,77 @@
   "points": [
     {
       "id": "C1",
-      "name": "Alfagro Distribuciones",
+      "name": "Distribuidora Norte",
       "latitude": 2.449371790947889,
       "longitude": -76.60225432081373,
       "dataStatus": "USER_PROVIDED_COORDINATE"
     },
     {
       "id": "C2",
-      "name": "Grupo Surticampo SAS",
+      "name": "Distribuidora Centro",
       "latitude": 2.448775892614762,
       "longitude": -76.60170816842958,
       "dataStatus": "USER_PROVIDED_COORDINATE"
     },
     {
       "id": "C3",
-      "name": "Conutrir - Bodega 5, Los Pinos",
+      "name": "Distribuidora Sur",
       "latitude": 2.488665777025983,
       "longitude": -76.56050874141953,
       "dataStatus": "USER_PROVIDED_COORDINATE"
     },
     {
       "id": "P1",
-      "name": "Cajete",
+      "name": "Productor P1",
       "latitude": 2.47733,
       "longitude": -76.67206,
       "dataStatus": "REFERENCE_POINT"
     },
     {
       "id": "P2",
-      "name": "Calibio",
+      "name": "Productor P2",
       "latitude": 2.5353,
       "longitude": -76.56769,
       "dataStatus": "REFERENCE_POINT"
     },
     {
       "id": "P3",
-      "name": "Julumito",
+      "name": "Productor P3",
       "latitude": 2.47713,
       "longitude": -76.64577,
       "dataStatus": "REFERENCE_POINT"
     },
     {
       "id": "P4",
-      "name": "Pueblillo",
+      "name": "Productor P4",
       "latitude": 2.44744,
       "longitude": -76.5835,
       "dataStatus": "REFERENCE_POINT"
     },
     {
       "id": "P5",
-      "name": "Puelenje",
+      "name": "Productor P5",
       "latitude": 2.43477,
       "longitude": -76.62546,
       "dataStatus": "REFERENCE_POINT"
     },
     {
       "id": "P6",
-      "name": "Rio Blanco",
+      "name": "Productor P6",
       "latitude": 2.5007,
       "longitude": -76.55743,
       "dataStatus": "REFERENCE_POINT"
     },
     {
       "id": "P7",
-      "name": "Vereda de Torres",
+      "name": "Productor P7",
       "latitude": 2.44574,
       "longitude": -76.63679,
       "dataStatus": "REFERENCE_POINT"
     },
     {
       "id": "P8",
-      "name": "La Cabuyera",
+      "name": "Productor P8",
       "latitude": 2.5259,
       "longitude": -76.55192,
       "dataStatus": "REFERENCE_POINT"

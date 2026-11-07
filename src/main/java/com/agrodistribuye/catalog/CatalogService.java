@@ -11,19 +11,19 @@ public class CatalogService {
         return new CatalogResponse(
                 "SIMULATED",
                 List.of(
-                        new CatalogResponse.Depot("C1", "C1-Norte", 20),
-                        new CatalogResponse.Depot("C2", "C2-Centro", 25),
-                        new CatalogResponse.Depot("C3", "C3-Sur", 18)
+                        new CatalogResponse.Depot("C1", NodeNames.name("C1"), 20),
+                        new CatalogResponse.Depot("C2", NodeNames.name("C2"), 25),
+                        new CatalogResponse.Depot("C3", NodeNames.name("C3"), 18)
                 ),
                 List.of(
-                        new CatalogResponse.Customer("P1", "Productor 1", "08:00-10:00", 30),
-                        new CatalogResponse.Customer("P2", "Productor 2", "09:00-12:00", 30),
-                        new CatalogResponse.Customer("P3", "Productor 3", "08:00-11:00", 30),
-                        new CatalogResponse.Customer("P4", "Productor 4", "10:00-13:00", 30),
-                        new CatalogResponse.Customer("P5", "Productor 5", "13:00-16:00", 30),
-                        new CatalogResponse.Customer("P6", "Productor 6", "14:00-17:00", 30),
-                        new CatalogResponse.Customer("P7", "Productor 7", "08:00-12:00", 40),
-                        new CatalogResponse.Customer("P8", "Productor 8", "13:00-17:00", 40)
+                        new CatalogResponse.Customer("P1", NodeNames.name("P1"), "08:00-10:00", 30),
+                        new CatalogResponse.Customer("P2", NodeNames.name("P2"), "09:00-12:00", 30),
+                        new CatalogResponse.Customer("P3", NodeNames.name("P3"), "08:00-11:00", 30),
+                        new CatalogResponse.Customer("P4", NodeNames.name("P4"), "10:00-13:00", 30),
+                        new CatalogResponse.Customer("P5", NodeNames.name("P5"), "13:00-16:00", 30),
+                        new CatalogResponse.Customer("P6", NodeNames.name("P6"), "14:00-17:00", 30),
+                        new CatalogResponse.Customer("P7", NodeNames.name("P7"), "08:00-12:00", 40),
+                        new CatalogResponse.Customer("P8", NodeNames.name("P8"), "13:00-17:00", 40)
                 ),
                 List.of(
                         new CatalogResponse.Product("PR1", "Fertilizantes"),
