@@ -773,14 +773,6 @@ https://docs.spring.io/spring-boot/
 Toth, P., & Vigo, D. (Eds.). (2014). Vehicle routing: Problems, methods,
 and applications (2nd ed.). SIAM.
 
-**Nota sobre clasificación de revistas:** Los cinco artículos son de
-2022–2025. El cuartil de la revista varía según la base, categoría y
-año. Hajba et al. aparece Q3 en SJR 2024, pero Q2 en JCR 2024 y SJR/JCR
-2025. Se debe acordar con el docente el criterio bibliométrico requerido
-para acreditarlo como Q1/Q2; los demás títulos tienen registros Q1/Q2
-consultables. No se presume que esta clasificación evalúe la calidad
-individual de cada estudio.
-
 # Anexo A. Alcance y reproducibilidad
 
 El docente autorizó utilizar datos simulados para el proyecto académico. Las cifras económicas no representan ahorros empresariales observados. El modelo Java se documenta con su código fuente, los archivos de ejemplo y los resultados registrados; no se acredita una implementación independiente equivalente en Julia/JuMP ni una validación cruzada del mismo problema.
