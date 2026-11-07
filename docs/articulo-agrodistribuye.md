@@ -681,64 +681,25 @@ en el ZIP del proyecto v8.
 
 # IV. Discusión
 
-El contraste con LB-HEURÍSTICA muestra reducciones simuladas de 22,40 % en costo y 38,98 % en distancia, con un vehículo menos y cobertura completa. Los COP 70.000 de costos fijos evitados son atribuibles a menor activación de flota; los COP 119.960,90 restantes corresponden a costos variables de recorridos más cortos y tipos de vehículos diferentes. Estas magnitudes se refieren a una regla constructiva reproducible, no a la operación observada de una empresa ni a todas las heurísticas posibles.
+La comparación con LB-HEURÍSTICA precisa qué optimiza AgroDistribuye: asignación a depósitos, selección de vehículos y secuencia de visitas, minimizando costos fijos y por kilómetro. Para la misma jornada simulada, el MILP redujo el costo de COP 848.217,90 a COP 658.257 (−22,40 %) y la distancia de 136,364 a 83,203 km (−38,98 %), manteniendo 8/8 productores y 36,5 t atendidas. La mejora está demostrada frente a una regla de primer ajuste, no frente a una operación empresarial real ni a todas las heurísticas posibles.
 
-La contrapartida es temporal: la conducción cae 36,90 %, mientras la espera en productores aumenta 42,25 %. En A, cada vehículo puede llegar pronto a su siguiente parada y aguardar la apertura de su ventana, porque la espera no integra la función objetivo de costo. Los tiempos agregados son minutos-vehículo y no la duración de una sola jornada. Fernando et al. (2024) compararon con una operación real, mientras que en este trabajo solo se mide mejora respecto a una línea base académica simulada.
+La diferencia de COP 189.960,90 tiene dos componentes: COP 70.000 (36,85 %) por activar un vehículo menos y COP 119.960,90 (63,15 %) de costos variables evitados. Estos últimos combinan distancia y composición heterogénea de flota, con tarifas de COP 1.800 y 2.500/km; no representan exclusivamente kilómetros ahorrados. La capacidad conjunta de los vehículos activos pasó de 45 a 40 t y su utilización de 81,11 % a 91,25 %, sin exceder capacidades o inventarios. El efecto principal es consolidar carga en menos recorridos factibles.
 
-La dificultad de solución exacta observada por Hajba et al. (2024) y
-Rojas-Cuevas et al. (2025) también contextualiza la brecha de
-optimalidad de la instancia implementada: la salida
-FEASIBLE_NEAR_OPTIMAL no acredita un óptimo global. Las alternativas de
-espera y duración utilizadas en el prototipo responden a la tensión
-entre costo y tiempo discutida por Fernando et al. (2024) y Liu et al.
-(2022), pero representan objetivos ponderados distintos; no deben
-interpretarse automáticamente como un frente de Pareto.
+La ventaja económica no equivale a mayor eficiencia temporal en todas las dimensiones. La conducción acumulada bajó de 199,08 a 125,61 minutos-vehículo (−36,90 %), pero la espera en productores aumentó de 1.012,92 a 1.440,91 (+42,25 %) y la operación total de 1.472,00 a 1.826,52 (+24,08 %). La función objetivo A no penaliza la espera. Ambas políticas salen a las 07:00, mientras algunos productores abren a las 13:00 o 14:00; una ruta corta puede llegar mucho antes de la atención. Estos tiempos suman vehículos, no duración de una única jornada.
 
-Las figuras 3–5 permiten distinguir cambios en recursos, cambios en la
-función objetivo y sensibilidad de parámetros. Un vehículo adicional no
-alteró el costo observado de la ruta base; incrementar capacidad en un
-20 % con un recargo por vehículo elevó el costo de COP 658.257 a COP
-733.257. La alternativa de espera B (50 COP/min en depósito) trasladó la
-espera fuera de los productores para esa solución registrada, mientras
-que C (50 COP/min de operación) redujo el tiempo de operación agregado
-de 1.826,52 a 496,43 min, a costa de 1.327,85 min de espera previa en
-depósito. Estas diferencias reflejan distintas prioridades y horarios
-del modelo, no ahorros empíricos.
+La sensibilidad identifica dos causas materiales de infactibilidad. Con demanda +20 %, se necesitarían 17,4 t de fertilizantes, pero los depósitos solo suman 17,0 t. Con capacidad vehicular −20 %, los seis vehículos dispondrían de 36,0 t, frente a 36,5 t solicitadas. Así, ningún orden de visitas elimina esos déficits de inventario o capacidad. Agregar un vehículo no cambió el costo base registrado; ampliar capacidad +20 % con un recargo supuesto elevó el costo a COP 733.257. Una mayor dotación no es automáticamente la alternativa más económica.
 
-La sensibilidad muestra fragilidad frente a un aumento del 20 % de la
-demanda o una reducción del 20 % de la capacidad, bajo los inventarios y
-flota simulados. El vehículo extra no redujo el costo registrado; la
-ampliación de capacidad con recargo lo aumentó. Antes de adoptar una
-alternativa es indispensable estimar costos reales, comprobar la
-disponibilidad de vehículos y contrastar un plan histórico de igual
-alcance.
+Los escenarios B y C exploran el compromiso entre espera y operación al flexibilizar la salida y añadir penalizaciones simuladas a la función objetivo. En C con 50 COP/min, la operación se redujo a 496,43 minutos-vehículo, desplazando 1.327,85 minutos-vehículo de espera al depósito. No representa una disminución automática del costo real ni es directamente comparable entre funciones objetivo distintas. La ejecución A reportó una brecha cercana a 0,62 % y estado FEASIBLE_NEAR_OPTIMAL: no prueba óptimo global. Este intercambio entre costo y horarios concuerda con la problemática estudiada por Fernando et al. (2024) y Liu et al. (2022).
 
-La aplicación aporta edición de entradas, ejecución, mapas, comparación
-y exportación sin programar. Su utilidad gerencial depende de datos
-confiables, capacitación, revisión de accesibilidad rural y
-mantenimiento de la matriz vial. Las limitaciones centrales son datos
-simulados, depósitos no verificados, puntos rurales aproximados,
-ausencia de tráfico en tiempo real, una sola jornada y ausencia de
-validación cruzada Julia/contraste y aval institucional.
+El aporte es una comparación metodológica verificable, no una cuantificación de ahorros empresariales. Se dispone de una jornada simulada y una única heurística, sin muestra de días ni validación externa. Los centros poblados representan referencias geográficas, no entregas en fincas; los depósitos son candidatos y OSRM no mide tráfico en tiempo real. Antes de adoptar resultados hacen falta datos operativos autorizados, costos del tiempo inactivo, rutas de referencia alternativas y contraste independiente del solucionador. La aplicación facilita ese análisis, pero no reemplaza las verificaciones de campo.
 
 # V. Conclusiones
 
-Se desarrolló un prototipo académico de ruteo multidepósito con ventanas horarias. Para la misma jornada simulada, LB-HEURÍSTICA empleó seis vehículos, recorrió 136,364 km y costó COP 848.217,90; el escenario A del MILP empleó cinco vehículos, recorrió 83,203 km y costó COP 658.257,00, con cobertura completa de 8 puntos y 36,5 t. La diferencia fue de −22,40 % en costo y −38,98 % en distancia, aunque no se certifica optimalidad global.
+Para la jornada académica simulada, AgroDistribuye generó rutas factibles para ocho productores y 36,5 t. Respecto de LB-HEURÍSTICA, utilizó cinco en lugar de seis vehículos, recorrió 53,161 km menos y disminuyó el costo modelado en COP 189.960,90 (22,40 %). La reducción está asociada tanto a menor activación de vehículos como a una asignación y secuencia de recorridos con costos variables inferiores; la comparación no constituye un ahorro empresarial verificado.
 
-La reducción simulada del costo se desglosa en COP 70.000 de costos fijos y COP 119.960,90 de costos variables. El aumento de 427,99 minutos-vehículo de espera ante productores es un costo temporal de oportunidad que impide afirmar mejoras en todos los indicadores. La comparación no constituye una medición de ahorros reales de una organización.
+El análisis revela una decisión de compromiso: la utilización de capacidad de vehículos activos aumentó de 81,11 % a 91,25 % y la conducción se redujo 73,47 minutos-vehículo, pero la espera ante productores subió 427,99 minutos-vehículo. Por ello, el menor costo del escenario A no significa menor tiempo operativo. La sensibilidad también identifica restricciones estructurales: con demanda +20 % faltan 0,4 t de fertilizantes, y con capacidad −20 % faltan 0,5 t de capacidad vehicular agregada. Estos hallazgos orientan qué recursos revisar primero.
 
-La sensibilidad registrada revela infactibilidad ante +20 % de demanda y
-−20 % de capacidad; la adición de un vehículo no modificó el costo base
-observado. Se recomienda al responsable futuro de logística usar la
-aplicación en una fase piloto de cuatro semanas, después de validar
-demanda, costos, depósitos y direcciones reales; no se proyecta ahorro
-monetario sin línea base comprobada.
-
-El prototipo Java/OR-Tools es la herramienta implementada; no puede
-recomendarse una herramienta Julia frente a otra sin completar la
-validación cruzada exigida. Trabajos futuros: JuMP y contraste
-independiente, pruebas extremas, datos empresariales reales, análisis de
-incertidumbre, aforos viales y publicación del repositorio.
+Antes de trasladar estos porcentajes a una empresa se necesitan datos y accesos rurales verificados, más jornadas y líneas base alternativas. También sigue pendiente la validación cruzada del MDVRPTW con otra herramienta; la solución A no tiene certificado de óptimo global.
 
 **Nota sobre el uso de inteligencia artificial.** Se utilizaron herramientas de inteligencia artificial como apoyo para la redacción y organización del documento, la elaboración y presentación de tablas, y algunas tareas de desarrollo y mejora del aplicativo web AgroDistribuye. Los autores revisaron y adaptaron estos aportes y asumen la responsabilidad por el contenido, la interpretación de resultados y el funcionamiento del prototipo.
 
