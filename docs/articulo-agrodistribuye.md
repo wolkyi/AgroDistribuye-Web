@@ -244,149 +244,151 @@ código Java; valores simulados salvo matriz OSRM.
 | α, β, γ          | COP/min     | B: α=50,100,300 y β=200; C: γ=50,100,200           |
 | A_d, N_d         | conjuntos   | 72 arcos dirigidos y 9 nodos locales por depósito  |
 
-Función objetivo. Para A se minimizan costos fijos de vehículos y costos
-por kilómetro (1). B agrega penalizaciones simuladas por esperas (2) y C
-penaliza la duración de la operación (3). El valor de Z_B o Z_C es un
-objetivo en COP-equivalentes, no un costo empresarial observado.
+### Formulación resumida: nueve ecuaciones clave
+La formulación completa se conserva en el apartado desplegable al final de esta subsección. En el texto principal se muestran las expresiones necesarias para entender las decisiones y las restricciones de AgroDistribuye.
 
-**Ecuación (1)**
+#### A. Función objetivo
+El escenario A minimiza los costos fijos de los vehículos y el costo por distancia recorrida.
+**(1)**
 
 $$\min Z_{A} = \sum_{d \in D}^{}{\sum_{v \in V}^{}F_{v}}z_{dv} + \sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{(i,j) \in A_{d}}^{}c_{v}}}L_{ij}^{d}x_{dvij}$$
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
 
-**Ecuación (2)**
+Los escenarios B y C agregan penalizaciones temporales simuladas; estos valores son funciones objetivo de comparación y no gastos empresariales observados.
+**(2)**
 
 $$Z_{B} = Z_{A} + \alpha\sum_{d \in D}^{}{\sum_{v \in V}^{}w_{dv}^{D}} + \beta\sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{i \in P}^{}w_{dvi}^{P}}}$$
 
-|----------------------------------------------------------------------------------------------------------------------------------------------------|-------|
 
-**Ecuación (3)**
+**(3)**
 
 $$Z_{C} = Z_{A} + \gamma\sum_{d \in D}^{}{\sum_{v \in V}^{}o_{dv}}$$
 
-|----------------------------------------------------------------------|-------|
 
-Restricciones de asignación, flujo, capacidad e inventario. Cada
-productor con demanda positiva debe ser atendido una vez (4); los
-vehículos físicos se activan en un solo depósito y solo visitan clientes
-si están activos (5). La salida, el retorno y la conservación de flujo
-aparecen en (6) y (7); las capacidades y existencias se imponen en (8) y
-(9).
-
-**Ecuación (4)**
+#### B. Atención, continuidad y recursos
+Cada productor con demanda positiva debe ser atendido exactamente una vez, y cada visita debe conservar el flujo de recorrido.
+**(4)**
 
 $$\sum_{d \in D}^{}{\sum_{v \in V}^{}y_{dvi}} = \delta_{i},\quad\forall i \in P$$
 
-|-----------------------------------------------------------------------------------|-------|
 
-**Ecuación (5)**
-
-$$\sum_{d \in D}^{}z_{dv} \leq 1,\quad y_{dvi} \leq z_{dv}$$
-
-|--------------------------------------------------------------|-------|
-
-**Ecuación (6)**
-
-$$\sum_{j \in P}^{}x_{dv0j} = \sum_{i \in P}^{}x_{dvi0} = z_{dv}$$
-
-|--------------------------------------------------------------------|-------|
-
-**Ecuación (7)**
+**(5)**
 
 $$\sum_{j \neq i}^{}x_{dvji} = \sum_{j \neq i}^{}x_{dvij} = y_{dvi}$$
 
-|-----------------------------------------------------------------------|-------|
 
-**Ecuación (8)**
+Las capacidades de los vehículos y las existencias de cada producto en los depósitos limitan las asignaciones.
+**(6)**
 
 $$\sum_{i \in P}^{}{\bar{q}}_{i}y_{dvi} \leq Q_{v}z_{dv}$$
 
-|------------------------------------------------------------|-------|
 
-**Ecuación (9)**
+**(7)**
 
 $$\sum_{v \in V}^{}{\sum_{i \in P}^{}q_{ik}}y_{dvi} \leq S_{dk}$$
 
-|-------------------------------------------------------------------|-------|
 
-Restricciones temporales. Se impone llegada al primer productor (10),
-continuidad entre productores (11), retorno antes del cierre (12),
-servicio dentro de la ventana (13), espera previa al despacho (14–15),
-cotas inferiores de espera en productores (16–17), duración de operación
-(18) y dominios (19). Las expresiones (10)–(12) y (16)–(18) se aplican a
-los índices y arcos correspondientes.
-
-**Ecuación (10)**
-
-$$t_{dvi} \geq s_{dv} + \tau_{0i}^{d} - M\left( 1 - x_{dv0i} \right)$$
-
-|------------------------------------------------------------------------|--------|
-
-**Ecuación (11)**
+#### C. Viabilidad temporal
+El inicio de un servicio depende de la duración del servicio anterior y del desplazamiento, y cada visita debe respetar su ventana de atención.
+**(8)**
 
 $$t_{dvj} \geq t_{dvi} + h_{i} + \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)$$
 
-|---------------------------------------------------------------------------------|--------|
 
-**Ecuación (12)**
-
-$$t_{dvi} + h_{i} + \tau_{i0}^{d} \leq T_{f} + M\left( 1 - x_{dvi0} \right)$$
-
-|-------------------------------------------------------------------------------|--------|
-
-**Ecuación (13)**
+**(9)**
 
 $$a_{i} \leq t_{dvi} \leq b_{i} - h_{i},\quad T_{0} \leq s_{dv} \leq T_{f}$$
 
-|------------------------------------------------------------------------------|--------|
 
-**Ecuación (14)**
+Las restricciones restantes comprueban la activación, salida y regreso de cada vehículo, el cierre de jornada, la espera, la duración y los dominios de variables.
+
+<details>
+<summary><strong>Anexo técnico: ver formulación completa (19 ecuaciones)</strong></summary>
+
+Estas expresiones reproducen la formulación extendida del documento. La numeración A1–A19 corresponde al anexo técnico del PDF y Word.
+
+#### Objetivos
+**(A1)**
+
+$$\min Z_{A} = \sum_{d \in D}^{}{\sum_{v \in V}^{}F_{v}}z_{dv} + \sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{(i,j) \in A_{d}}^{}c_{v}}}L_{ij}^{d}x_{dvij}$$
+
+**(A2)**
+
+$$Z_{B} = Z_{A} + \alpha\sum_{d \in D}^{}{\sum_{v \in V}^{}w_{dv}^{D}} + \beta\sum_{d \in D}^{}{\sum_{v \in V}^{}{\sum_{i \in P}^{}w_{dvi}^{P}}}$$
+
+**(A3)**
+
+$$Z_{C} = Z_{A} + \gamma\sum_{d \in D}^{}{\sum_{v \in V}^{}o_{dv}}$$
+
+#### Asignación, flujo y recursos
+**(A4)**
+
+$$\sum_{d \in D}^{}{\sum_{v \in V}^{}y_{dvi}} = \delta_{i},\quad\forall i \in P$$
+
+**(A5)**
+
+$$\sum_{d \in D}^{}z_{dv} \leq 1,\quad y_{dvi} \leq z_{dv}$$
+
+**(A6)**
+
+$$\sum_{j \in P}^{}x_{dv0j} = \sum_{i \in P}^{}x_{dvi0} = z_{dv}$$
+
+**(A7)**
+
+$$\sum_{j \neq i}^{}x_{dvji} = \sum_{j \neq i}^{}x_{dvij} = y_{dvi}$$
+
+**(A8)**
+
+$$\sum_{i \in P}^{}{\bar{q}}_{i}y_{dvi} \leq Q_{v}z_{dv}$$
+
+**(A9)**
+
+$$\sum_{v \in V}^{}{\sum_{i \in P}^{}q_{ik}}y_{dvi} \leq S_{dk}$$
+
+#### Tiempos, esperas y dominios
+**(A10)**
+
+$$t_{dvi} \geq s_{dv} + \tau_{0i}^{d} - M\left( 1 - x_{dv0i} \right)$$
+
+**(A11)**
+
+$$t_{dvj} \geq t_{dvi} + h_{i} + \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)$$
+
+**(A12)**
+
+$$t_{dvi} + h_{i} + \tau_{i0}^{d} \leq T_{f} + M\left( 1 - x_{dvi0} \right)$$
+
+**(A13)**
+
+$$a_{i} \leq t_{dvi} \leq b_{i} - h_{i},\quad T_{0} \leq s_{dv} \leq T_{f}$$
+
+**(A14)**
 
 $$w_{dv}^{D} = s_{dv} - T_{0}$$
 
-|---------------------------------|--------|
-
-**Ecuación (15)**
+**(A15)**
 
 $$s_{dv} \leq T_{0} + \left( T_{f} - T_{0} \right)z_{dv},\quad w_{dv}^{D} \leq \left( T_{f} - T_{0} \right)z_{dv}$$
 
-|---------------------------------------------------------------------------------------------------------------------|--------|
-
-**Ecuación (16)**
+**(A16)**
 
 $$w_{dvi}^{P} \geq t_{dvi} - s_{dv} - \tau_{0i}^{d} - M\left( 1 - x_{dv0i} \right)$$
 
-|--------------------------------------------------------------------------------------|--------|
-
-**Ecuación (17)**
+**(A17)**
 
 $$w_{dvj}^{P} \geq t_{dvj} - t_{dvi} - h_{i} - \tau_{ij}^{d} - M\left( 1 - x_{dvij} \right)$$
 
-|-----------------------------------------------------------------------------------------------|--------|
-
-**Ecuación (18)**
+**(A18)**
 
 $$o_{dv} \geq t_{dvi} + h_{i} + \tau_{i0}^{d} - s_{dv} - M\left( 1 - x_{dvi0} \right)$$
 
-|-----------------------------------------------------------------------------------------|--------|
-
-**Ecuación (19)**
+**(A19)**
 
 $$z_{dv},y_{dvi},x_{dvij} \in \{ 0,1\};\quad t,s,w^{D},w^{P},o \geq 0$$
 
-|-------------------------------------------------------------------------|--------|
+</details>
 
-En estas ecuaciones, el nodo 0 representa el depósito de la pareja
-(d,v), N_d={0}∪P y A_d excluye los bucles. Se define q̄(i)=Σ_k q(i,k) y
-δ(i)=1 solo si q̄(i)\>0. La restricción (13) usa el límite superior
-b(i)−h(i): el servicio debe terminar dentro de la ventana. La salida se
-fija en 07:00 en A y es flexible en B y C. Las esperas de productor y la
-duración se imponen mediante cotas inferiores dentro del MILP; los
-valores de tiempo presentados al usuario se reconstruyen después a
-partir de la secuencia de la ruta. El modelo se clasifica como
-programación entera mixta (MILP).
-
+El nodo 0 representa el depósito correspondiente a cada par depósito–vehículo. El modelo utiliza demandas en toneladas, distancias en kilómetros y tiempos en minutos; se clasifica como programación entera mixta (MILP). La salida se fija a las 07:00 en A y es flexible en los escenarios B y C. Las esperas y duraciones presentadas al usuario se reconstruyen a partir de las rutas.
 ## 2.4 Implementación y verificación
 
 La aplicación utiliza Java, Spring Boot, OR-Tools 9.12.4544 con SCIP,
