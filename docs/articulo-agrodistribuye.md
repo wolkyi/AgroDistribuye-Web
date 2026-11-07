@@ -707,6 +707,8 @@ validación cruzada exigida. Trabajos futuros: JuMP y contraste
 independiente, pruebas extremas, datos empresariales reales, análisis de
 incertidumbre, aforos viales y publicación del repositorio.
 
+**Nota sobre el uso de inteligencia artificial.** Se utilizaron herramientas de inteligencia artificial como apoyo para la redacción y organización del documento, la elaboración y presentación de tablas, y algunas tareas de desarrollo y mejora del aplicativo web AgroDistribuye. Los autores revisaron y adaptaron estos aportes y asumen la responsabilidad por el contenido, la interpretación de resultados y el funcionamiento del prototipo.
+
 # Referencias (APA 7.ª edición)
 
 Dantzig, G. B., & Ramser, J. H. (1959). The truck dispatching problem.
